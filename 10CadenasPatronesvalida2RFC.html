@@ -1,0 +1,19 @@
+<!DOCTYPE>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="PQG">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="text/javascript" src="js/scripts.js"></script>
+    <title>Control submit por evento formulario</title>
+</head>
+<body>
+	<form>
+		RFC <input type="text" name="txtRFC" maxlength="13" size="15"/>
+		<input type="submit" onClick="return valida(txtRFC);" value="Ok"/>
+	</form>
+  <h2 id="resultado"></h2>
+</body>
+</html>

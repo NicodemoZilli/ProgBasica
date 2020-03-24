@@ -1,0 +1,12 @@
+input {
+  font-family: 'Courgette', cursive;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 5px;
+  background-color: #ffbf00;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.oculto { display: none; }
+.visible { display: inline; }
