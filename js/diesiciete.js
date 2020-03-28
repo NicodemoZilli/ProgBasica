@@ -1,16 +1,10 @@
 function validaFechaMenor(campo){
-  var bRet = false;
-  var dHoy = new Date();
-  var dCapt = null;
+  var bRet=false;
   if (campo.value == "")
     alert("Faltan datos");
-  else{
-    dCapt = validaFecha(campo.value);
-    if (dCapt != null && dCapt < dHoy)
-      bRet = true;
-    else
-      alert("La fecha debe ser menor a la fecha actual");
-  }
+  else
+    bRet=validaFecha(campo.value);
+
   return bRet;
 }
 
@@ -23,9 +17,15 @@ function validaFechaMenor(campo){
 
       if (valor.match(/^\d{4}\-\d{2}\-\d{2}$/)){
         nDia = parseInt(valor.substring(8,10), 10);
-        nMes = parseInt(valor.substring(6,7), 10);
+        nMes = parseInt(valor.substring(5,7), 10);
         nAnio = parseInt(valor.substring(0,4), 10);
 
+        //alert("dia: "+nDia+" Mes: "+nMes+" Año: "+nAnio);
+
+        if(nDia<1)
+          nDia=nDia*-1;
+        else if(nMes<1)
+          nMes=nMes*-1;
 
         if (nDia <1 || nDia>31)
           alert("El día no es válido")
@@ -47,20 +47,30 @@ function validaFechaMenor(campo){
             }//fin validaci�n día-mes
           }//mes válido
         }//día válido
-        creasigno(nDia,nMes);
+        //creasigno(nDia,nMes);
       }//formato válido
 
-      else{
+      else
         alert("No tiene formato de fecha");
+
+
+      var dHoy = new Date();
+
+      if (dConvertida != null && dConvertida < dHoy){
+        creasigno(nDia,nMes);
+        return true;
+      }else{
+          alert("La fecha debe ser menor a la fecha actual");
+          return false;
       }
-      return dConvertida;
   }
 
 
   function creasigno(nDia,nMes){
 
-  var newDiv = document.createElement("div");
+  //var newDiv = document.createElement("div");
   var color;
+  var fontcolor="black";
   if((nDia>20) && (nMes==3) || (nDia <=20) && (nMes==4)){
   var newContent = document.createTextNode("SIGNO ARIES\n\nNúmero de la Suerte: 5");
    color = "red";
@@ -90,7 +100,7 @@ function validaFechaMenor(campo){
                    color = "#cf3476";
                 }else if ((nDia>21) && (nMes==12) || (nDia <=21) && (nMes==1)){
                     var newContent = document.createTextNode("SIGNO CAPRICORNIO\n\nNúmero de la Suerte: 23");
-                     color = "black"; var fontcolor="#fff";
+                     color = "black";  fontcolor="#fff";
                   }else if ((nDia>21) && (nMes==1) || (nDia <=21) && (nMes==2)){
                       var newContent = document.createTextNode("SIGNO ACUARIO\n\nNúmero de la Suerte: 0");
                        color = "gray";
@@ -100,10 +110,14 @@ function validaFechaMenor(campo){
                       }
 
   //var newContent = document.createTextNode("SIGNO");
-  newDiv.appendChild(newContent); //añade texto al div creado.
+  //newDiv.appendChild(newContent); //añade texto al div creado.
+  //newDiv.style="border: 3px solid #999999; background-color:"+color+"; color:"+fontcolor+"; width: 200px ;height:150px ";
 
-   // añade el elemento creado y su contenido al DOM
-   var currentDiv = document.getElementById("div");
-   document.body.insertBefore(newDiv, currentDiv);
-  newDiv.style="border: 3px solid #999999; background-color:"+color+"; color:"+fontcolor+"; width: 200px ;height:150px ";
+
+   var currentDiv = document.getElementById("sg");
+   currentDiv.style="border: 3px solid #999999; background-color:"+color+"; color:"+fontcolor+"; width: 200px ;height:150px ";
+   currentDiv.appendChild(newContent);
+   var ch = currentDiv.childNodes;
+   currentDiv.replaceChild(newContent, ch[0]);
+
 }
